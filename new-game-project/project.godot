@@ -11,6 +11,5 @@ config_version=5
 [application]
 
 config/name="Foxi"
-run/main_scene="uid://cqxx0yqyrvfgn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
