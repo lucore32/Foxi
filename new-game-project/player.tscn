@@ -104,7 +104,7 @@ size = Vector2(16, 22)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
 size = Vector2(16, 16)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Foxi" type="CharacterBody2D"]
 z_index = 1
 texture_filter = 1
 scale = Vector2(5, 5)
@@ -121,5 +121,4 @@ shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="DuckCol" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_i3pqv")
