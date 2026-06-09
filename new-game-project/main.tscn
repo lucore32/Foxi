@@ -18,6 +18,5 @@ position = Vector2(160, 560)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(584, 328)
-scale = Vector2(1, 1)
 
 [node name="HUD" parent="." instance=ExtResource("5_lquwl")]

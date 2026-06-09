@@ -23,9 +23,10 @@ func new_game():
 	# Initialize speed at the start of the game
 	speed = START_SPEED 
 	$HUD.get_node("StartLabel").show()
+
 func _process(delta):
 	if game_running:
-			
+		
 		# 1. Update the position directly using speed and delta
 		# (Multiply by 60 if you want '9' to mean 9 pixels per frame at 60fps, 
 		# or just increase START_SPEED to something like 200-500)
@@ -43,6 +44,7 @@ func _process(delta):
 	else:
 		if Input.is_action_pressed("ui_accept"):
 			game_running = true
+			$HUD.get_node("StartLabel").hide()
 
 func show_score():
 	$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score / SCORE_MODIFIER)
