@@ -1,12 +1,13 @@
 extends Node
 
-const FOX_START_POS := Vector2i(100, 560)
+const FOX_START_POS := Vector2i(100, 640)
 const CAM_START_POS := Vector2i(576, 324)
 var score : int
 const SCORE_MODIFIER : int = 10
 var speed : float
 const START_SPEED : float = 9.0
 const MAX_SPEED : float = 25.0 
+const SPEED_MODIFIER : int = 5000
 var screen_size : Vector2i
 var game_running : bool
 
@@ -26,7 +27,8 @@ func new_game():
 
 func _process(delta):
 	if game_running:
-		
+		speed = START_SPEED + score / SPEED_MODIFIER
+		print(speed)
 		# 1. Update the position directly using speed and delta
 		# (Multiply by 60 if you want '9' to mean 9 pixels per frame at 60fps, 
 		# or just increase START_SPEED to something like 200-500)
