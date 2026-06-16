@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://q1xuvqet07y4"]
+
+[ext_resource type="Script" uid="uid://du4ay05uymvru" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://ca5c1lswd6k4w" path="res://bg.tscn" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bfnqkt3skftkx" path="res://ground.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cox46jdgc0ke4" path="res://player.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://b0vpyh8c7nqr5" path="res://hud.tscn" id="5_lquwl"]
+
+[node name="Main" type="Node" unique_id=242331084]
+script = ExtResource("1_1bvp3")
+
+[node name="Bg" parent="." unique_id=1371446461 instance=ExtResource("1_h2yge")]
+
+[node name="Ground" parent="." unique_id=1175085292 instance=ExtResource("2_1bvp3")]
+
+[node name="Player" parent="." unique_id=664975325 instance=ExtResource("3_lquwl")]
+position = Vector2(160, 560)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=536952645]
+position = Vector2(584, 328)
+zoom = Vector2(0.1, 0.1)
+
+[node name="HUD" parent="." unique_id=340643705 instance=ExtResource("5_lquwl")]

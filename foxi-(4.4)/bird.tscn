@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://drvkkyr1w3kqo"]
+
+[ext_resource type="Texture2D" uid="uid://beyrgqapmwxmv" path="res://Sunny-land-files/Assets/Characters/eagle/Spritesheets/eagle-attack.png" id="1_g5k2s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crnqq"]
+atlas = ExtResource("1_g5k2s")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j88tq"]
+atlas = ExtResource("1_g5k2s")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cchwj"]
+atlas = ExtResource("1_g5k2s")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ljjq"]
+atlas = ExtResource("1_g5k2s")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_axl6x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crnqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j88tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cchwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ljjq")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr30m"]
+radius = 16.0
+height = 32.0
+
+[node name="Bird" type="Area2D"]
+scale = Vector2(3, 3)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_axl6x")
+animation = &"flying"
+autoplay = "flying"
+frame_progress = 0.566139
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_yr30m")
