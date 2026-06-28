@@ -1,18 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://qvlrtpti2psg"]
+[gd_scene format=3 uid="uid://qvlrtpti2psg"]
 
 [ext_resource type="Texture2D" uid="uid://dadk7xqmuog5m" path="res://Sunny-land-files/Assets/environment/Props/crate.png" id="1_uep05"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mo0jf"]
-size = Vector2(16, 16)
+size = Vector2(32, 32)
 
-[node name="Crate" type="Area2D"]
+[node name="Crate" type="Area2D" unique_id=1749237534]
 texture_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1318861656]
 texture_filter = 1
-scale = Vector2(3, 3)
+position = Vector2(5.9604645e-08, -5.9604645e-08)
+scale = Vector2(5.9374995, 5.9374995)
 texture = ExtResource("1_uep05")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=929093487]
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_mo0jf")

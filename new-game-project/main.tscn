@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bfnqkt3skftkx" path="res://ground.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cox46jdgc0ke4" path="res://player.tscn" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b0vpyh8c7nqr5" path="res://hud.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bjqwttsw1ik3c" path="res://game_over.tscn" id="6_7mycd"]
 
 [node name="Main" type="Node" unique_id=1645782175]
 script = ExtResource("1_1bvp3")
@@ -20,3 +21,6 @@ position = Vector2(160, 560)
 position = Vector2(584, 328)
 
 [node name="HUD" parent="." unique_id=578413943 instance=ExtResource("5_lquwl")]
+
+[node name="GameOver" parent="." unique_id=697435301 instance=ExtResource("6_7mycd")]
+process_mode = 2

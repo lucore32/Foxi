@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://drvkkyr1w3kqo"]
+[gd_scene format=3 uid="uid://drvkkyr1w3kqo"]
 
+[ext_resource type="Script" uid="uid://ba1lpn5wclwae" path="res://bird.gd" id="1_crnqq"]
 [ext_resource type="Texture2D" uid="uid://beyrgqapmwxmv" path="res://Sunny-land-files/Assets/Characters/eagle/Spritesheets/eagle-attack.png" id="1_g5k2s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_crnqq"]
@@ -39,18 +40,21 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr30m"]
-radius = 16.0
+radius = 13.333334
 height = 32.0
 
-[node name="Bird" type="Area2D"]
+[node name="Bird" type="Area2D" unique_id=1264205629]
 scale = Vector2(3, 3)
+script = ExtResource("1_crnqq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=763091342]
 texture_filter = 1
+position = Vector2(2.3841858e-07, 0)
+scale = Vector2(0.7916666, 0.7916665)
 sprite_frames = SubResource("SpriteFrames_axl6x")
 animation = &"flying"
 autoplay = "flying"
 frame_progress = 0.566139
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=106353466]
 shape = SubResource("CapsuleShape2D_yr30m")
