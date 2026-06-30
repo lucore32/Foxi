@@ -12,11 +12,19 @@ func _physics_process(delta):
 			pass
 		else:
 			$RunCol.disabled = false
+			$JumpCol.disabled = true
 			if Input.is_action_pressed("ui_accept"):
 				velocity.y = JUMP_SPEED
+				$JumpCol.disabled = false
+				$RunCol.disabled = true
+				$DuckCol.disabled = true
 			elif Input.is_action_pressed("ui_down"):
 				$AnimatedSprite2D.play("crouch")
 				$RunCol.disabled = true
+				$JumpCol.disabled = true
+				$DuckCol.disabled = false
+				
+				
 			else:
 				$AnimatedSprite2D.play("run")
 	else:

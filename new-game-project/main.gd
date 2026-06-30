@@ -86,7 +86,7 @@ func _process(delta):
 
 func generate_obs():
 	
-	if obstacles.is_empty() or last_obs.position.x < score + randi_range(300, 400):
+	if obstacles.is_empty() or last_obs.position.x < score + randi_range(100, 300):
 		var obs_type = obstacle_types[randi() % obstacle_types.size()]
 		var obs
 		var max_obs = difficulty + 1
