@@ -14,6 +14,7 @@ var difficulty
 const MAX_DIFFICULTY : int = 2
 var score : int
 const SCORE_MODIFIER : int = 10
+var high_score : int
 var speed : float
 const START_SPEED : float = 6.0
 const MAX_SPEED : float = 12.0
@@ -99,7 +100,7 @@ func generate_obs():
 			last_obs = obs
 			add_obs(obs, obs_x, obs_y)
 		#additionally random chance to spawn bird
-		if difficulty == 0: #MAX_DIFFICULTY:
+		if difficulty == MAX_DIFFICULTY:
 			if (randi() % 2) == 0:
 				#generate bird obstacles
 				obs = bird_scene.instantiate()
@@ -124,6 +125,13 @@ func hit_obs(body):
 
 func show_score():
 	$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score / SCORE_MODIFIER)
+
+func check_high_score():
+	if score > high_score:
+		high_score = score
+		$HUD.get_node("HighScoreLabel").text = "HIGHSCORE: " + str(score / SCORE_MODIFIER)
+
+
 
 func adjust_difficulty():
 	difficulty = score / SPEED_MODIFIER
