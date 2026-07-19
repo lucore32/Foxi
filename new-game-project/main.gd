@@ -23,7 +23,7 @@ var screen_size : Vector2i
 var ground_height : int
 var game_running : bool
 var last_obs
-
+const CHERRY_SCENE = preload("res://cherry.tscn")
 
 func _ready():
 	screen_size = get_window().size 
@@ -80,6 +80,8 @@ func _process(delta):
 		for obs in obstacles:
 			if obs.position.x < ($Camera2D.position.x - screen_size.x):
 				remove_obs(obs)
+		if randf() < 0.005:
+			generate_cherry()
 	else:
 		if Input.is_action_pressed("ui_accept"):
 			game_running = true
@@ -142,3 +144,36 @@ func game_over():
 	get_tree().paused = true
 	game_running = false
 	$GameOver.show()
+	
+func generate_cherry():
+	var cherry = CHERRY_SCENE.instantiate()
+	
+	# Cherries position
+	var cherry_x = screen_size.x + score + randf_range(100, 300)
+	var cherry_y = randf_range(350, 450) 
+	cherry.position = Vector2(cherry_x, cherry_y)
+	
+	add_child(cherry)
+	obstacles.append(cherry)
+	
+	# Connect the signal
+	cherry.get_node("Area2D").body_entered.connect(_on_cherry_collected.bind(cherry))
+	
+	# ERROR CHECK 1: Confirm the cherry was created
+	print("🍒 Cherry spawned at: ", cherry.position)
+	
+func _on_cherry_collected(body: Node2D, cherry_instance: Node2D):
+	# ERROR CHECK 2: See what exactly touched the cherry
+	print("💥 Cherry was touched by something named: ", body.name)
+	
+	# Updated to match your character's name!
+	if body.name == "Foxi":
+		print("✅ Foxi collected the cherry! Adding score.")
+		score += 500
+		show_score()
+		
+		# Remove it from the tracking array and erase it from the game
+		obstacles.erase(cherry_instance)
+		cherry_instance.queue_free()
+	else:
+		print("❌ Collision ignored because it wasn't Foxi.")
