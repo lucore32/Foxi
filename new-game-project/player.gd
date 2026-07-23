@@ -21,7 +21,7 @@ func _physics_process(delta):
 			$RunCol.disabled = false
 			$JumpCol.disabled = true
 			
-			if Input.is_action_pressed("ui_accept"):
+			if Input.is_action_pressed("ui_accept") or Input.is_action_pressed("Jump"):
 				velocity.y = JUMP_SPEED
 				$JumpCol.disabled = false
 				$RunCol.disabled = true

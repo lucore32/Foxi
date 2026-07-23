@@ -140,7 +140,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(16, 16.000002)
 
-[node name="Foxi" type="CharacterBody2D" unique_id=519740941]
+[node name="Foxi" type="CharacterBody2D" unique_id=519740941 groups=["player"]]
 z_index = 1
 texture_filter = 1
 scale = Vector2(5, 5)

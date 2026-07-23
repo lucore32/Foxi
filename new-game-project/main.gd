@@ -83,7 +83,7 @@ func _process(delta):
 		if randf() < 0.005:
 			generate_cherry()
 	else:
-		if Input.is_action_pressed("ui_accept"):
+		if Input.is_action_pressed("ui_accept") or Input.is_action_pressed("Jump"):
 			game_running = true
 			$HUD.get_node("StartLabel").hide()
 
@@ -98,7 +98,7 @@ func generate_obs():
 			var obs_height = obs.get_node("Sprite2D").texture.get_height()
 			var obs_scale = obs.get_node("Sprite2D").scale
 			var obs_x : int = screen_size.x + score + 100 + (i * 100)
-			var obs_y : int = screen_size.y - ground_height - (obs_height * obs_scale.y / 2) + 5
+			var obs_y : int = screen_size.y - ground_height - (obs_height * obs_scale.y / 2) + 30
 			last_obs = obs
 			add_obs(obs, obs_x, obs_y)
 		#additionally random chance to spawn bird
@@ -141,6 +141,7 @@ func adjust_difficulty():
 		difficulty = MAX_DIFFICULTY
 
 func game_over():
+	check_high_score()
 	get_tree().paused = true
 	game_running = false
 	$GameOver.show()
@@ -148,7 +149,6 @@ func game_over():
 func generate_cherry():
 	var cherry = CHERRY_SCENE.instantiate()
 	
-	# Cherries position
 	var cherry_x = screen_size.x + score + randf_range(100, 300)
 	var cherry_y = randf_range(350, 450) 
 	cherry.position = Vector2(cherry_x, cherry_y)
@@ -156,24 +156,13 @@ func generate_cherry():
 	add_child(cherry)
 	obstacles.append(cherry)
 	
-	# Connect the signal
 	cherry.get_node("Area2D").body_entered.connect(_on_cherry_collected.bind(cherry))
 	
-	# ERROR CHECK 1: Confirm the cherry was created
-	print("🍒 Cherry spawned at: ", cherry.position)
-	
 func _on_cherry_collected(body: Node2D, cherry_instance: Node2D):
-	# ERROR CHECK 2: See what exactly touched the cherry
-	print("💥 Cherry was touched by something named: ", body.name)
 	
-	# Updated to match your character's name!
-	if body.name == "Foxi":
-		print("✅ Foxi collected the cherry! Adding score.")
+	if body.is_in_group("player"):
 		score += 500
 		show_score()
 		
-		# Remove it from the tracking array and erase it from the game
 		obstacles.erase(cherry_instance)
 		cherry_instance.queue_free()
-	else:
-		print("❌ Collision ignored because it wasn't Foxi.")

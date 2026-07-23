@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://du4555qfby0g3"]
+[gd_scene format=3 uid="uid://du4555qfby0g3"]
 
-[ext_resource type="Texture2D" uid="uid://dq6etgxkovoc7" path="res://Sunny-land-files/Assets/environment/Props/rock-1.png" id="1_o0qsl"]
+[ext_resource type="Texture2D" uid="uid://do4755rmdjd8b" path="res://chocolate_cake.png" id="1_o0qsl"]
 
-[node name="Rock" type="Area2D"]
+[node name="Rock" type="Area2D" unique_id=1110720710]
 texture_filter = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2119470394]
 texture_filter = 1
-scale = Vector2(3, 3)
+scale = Vector2(1.8599504, 1.8399708)
 texture = ExtResource("1_o0qsl")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-scale = Vector2(3, 3)
-polygon = PackedVector2Array(8, -24, -2.66667, -24, -5.33333, -18.6667, -8, -5.33333, -13.3333, -5.33333, -16, -2.66667, -18.6667, 2.66667, -21.3333, 10.6667, -24, 21.3333, -16, 26.6667, -5.33333, 24, 0, 21.3333, 10.6667, 24, 21.3333, 24, 24, 21.3333, 24, 13.3333, 10.6667, -13.3333, 10.6667, -21.3333)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1928082830]
+scale = Vector2(1.6714094, 1.6887107)
+polygon = PackedVector2Array(-5.200001, -32.3, -8, -31.5, -8, -29.8, -13.5, -23.4, -16, -25.1, -16, -27, -26, -27, -30, -21.7, -30, -18.3, -32.5, -17, -35, -17, -35, 24.800003, -42, 28.800003, -42, 36.1, -36, 40.1, -36, 41.699997, -22.2, 44, 23.400002, 44, 32.4, 40, 35.1, 40, 38.1, 35, 41.199997, 35, 36.199997, 25, 35, 25, 35, 18, 34.1, 18, 35, -8, 35, -13.900002, 28, -19.9, 28, -21.3, 14, -27.3, 14, -28.3, 11.5, -29.4, 5.799999, -23.7, 5.200001, -25, 0, -25)
