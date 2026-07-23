@@ -21,6 +21,11 @@ region = Rect2(63, 0, 21, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uxbku"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"collected",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ht0rm")
@@ -56,8 +61,8 @@ height = 16.0
 texture_filter = 1
 scale = Vector2(4.5660853, 4.554369)
 sprite_frames = SubResource("SpriteFrames_uxbku")
+animation = &"collected"
 autoplay = "default"
-frame_progress = 0.03456536
 script = ExtResource("2_ht0rm")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1964645692]

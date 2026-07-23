@@ -1,43 +1,7 @@
 [gd_scene format=3 uid="uid://drvkkyr1w3kqo"]
 
 [ext_resource type="Script" uid="uid://ba1lpn5wclwae" path="res://bird.gd" id="1_crnqq"]
-[ext_resource type="Texture2D" uid="uid://beyrgqapmwxmv" path="res://Sunny-land-files/Assets/Characters/eagle/Spritesheets/eagle-attack.png" id="1_g5k2s"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_crnqq"]
-atlas = ExtResource("1_g5k2s")
-region = Rect2(0, 0, 40, 41)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j88tq"]
-atlas = ExtResource("1_g5k2s")
-region = Rect2(40, 0, 40, 41)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cchwj"]
-atlas = ExtResource("1_g5k2s")
-region = Rect2(80, 0, 40, 41)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ljjq"]
-atlas = ExtResource("1_g5k2s")
-region = Rect2(120, 0, 40, 41)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_axl6x"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_crnqq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j88tq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cchwj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6ljjq")
-}],
-"loop": true,
-"name": &"flying",
-"speed": 10.0
-}]
+[ext_resource type="Texture2D" uid="uid://dpvrn58l5stpx" path="res://crate.png" id="2_crnqq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr30m"]
 radius = 13.333334
@@ -47,14 +11,11 @@ height = 32.0
 scale = Vector2(3, 3)
 script = ExtResource("1_crnqq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=763091342]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2137428908]
 texture_filter = 1
-position = Vector2(2.3841858e-07, 0)
-scale = Vector2(0.7916666, 0.7916665)
-sprite_frames = SubResource("SpriteFrames_axl6x")
-animation = &"flying"
-autoplay = "flying"
-frame_progress = 0.566139
+position = Vector2(-5.3333335, 0)
+scale = Vector2(2.3749998, 2.3749998)
+texture = ExtResource("2_crnqq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=106353466]
 shape = SubResource("CapsuleShape2D_yr30m")
