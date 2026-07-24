@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dpvrn58l5stpx" path="res://crate.png" id="2_crnqq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr30m"]
-radius = 13.333334
+radius = 10.666667
 height = 32.0
 
 [node name="Bird" type="Area2D" unique_id=1264205629]

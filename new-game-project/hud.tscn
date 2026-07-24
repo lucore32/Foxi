@@ -39,3 +39,14 @@ theme_override_fonts/font = ExtResource("1_37p78")
 theme_override_font_sizes/font_size = 50
 text = "HIGHSCORE: 0"
 horizontal_alignment = 1
+
+[node name="LivesLabel" type="Label" parent="." unique_id=1810383834]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_37p78")

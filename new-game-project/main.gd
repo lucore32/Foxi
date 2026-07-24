@@ -5,8 +5,11 @@ var crate_scene = preload("res://crate.tscn")
 var bird_scene = preload("res://bird.tscn")
 var obstacle_types := [rock_scene, crate_scene]
 var obstacles : Array
-var bird_heights := [200, 400]
+var bird_heights := [250, 400]
 
+var lives: int = 3
+var max_lives: int = 3
+var is_invincible: bool = false
 
 const FOX_START_POS := Vector2i(150, 485)
 const CAM_START_POS := Vector2i(576, 324)
@@ -30,56 +33,70 @@ func _ready():
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	$GameOver.get_node("Button").pressed.connect(new_game)
 	new_game()
-	
+
 func new_game():
 	score = 0
 	show_score()
+	
+	# Reset lives & invincibility
+	lives = max_lives
+	is_invincible = false
+	$Player.modulate.a = 1.0
+	update_lives_ui()
+	
+	# Clear obstacles
+	for obs in obstacles:
+		if is_instance_valid(obs):
+			obs.queue_free()
+	obstacles.clear()
+	
+	# Clear stray animated sprites (cherries)
+	for child in get_children():
+		if child is AnimatedSprite2D and child.has_signal("animation_finished"):
+			child.queue_free()
+			
 	game_running = false
 	get_tree().paused = false
 	difficulty = 0
 	
-	#delete all obstacles
-	for obs in obstacles:
-		obs.queue_free()
-	obstacles.clear()
-	
-	#reset nodes
+	# Reset nodes
 	$Player.position = FOX_START_POS
 	$Player.velocity = Vector2i(0,0)
 	$Camera2D.position = CAM_START_POS
 	$Ground.position = Vector2i(0, 0)
 	
-	#reset HUD and game over screen
+	# Reset HUD and game over screen
 	$HUD.get_node("StartLabel").show()
 	$GameOver.hide()
 
 func _process(delta):
 	if game_running:
-		#speed up and adjust difficulty
+		# Speed up and adjust difficulty
 		speed = START_SPEED + score / SPEED_MODIFIER
 		if speed > MAX_SPEED:
 			speed = MAX_SPEED
 		adjust_difficulty()
 		
-		#generate obstacles
+		# Generate obstacles
 		generate_obs()
 		
-		#move fox and camera
+		# Move player and camera
 		$Player.position.x += speed
 		$Camera2D.position.x += speed
 		
-		#update score
+		# Update score
 		score += speed
 		show_score()
 		
-		#update ground position
-		if $Camera2D.position.x - $Ground.position.x >  screen_size.x * 1.5:
+		# Update ground position
+		if $Camera2D.position.x - $Ground.position.x > screen_size.x * 1.5:
 			$Ground.position.x += screen_size.x 
 			
-		#remove obstacles that have gone off the screen
+		# Remove obstacles that have gone off the screen
 		for obs in obstacles:
 			if obs.position.x < ($Camera2D.position.x - screen_size.x):
 				remove_obs(obs)
+				
 		if randf() < 0.005:
 			generate_cherry()
 	else:
@@ -88,12 +105,11 @@ func _process(delta):
 			$HUD.get_node("StartLabel").hide()
 
 func generate_obs():
-	
 	if obstacles.is_empty() or last_obs.position.x < score + randi_range(100, 300):
 		var obs_type = obstacle_types[randi() % obstacle_types.size()]
 		var obs
 		var max_obs = difficulty + 1
-		for i in range(randi() %  max_obs + 1):
+		for i in range(randi() % max_obs + 1):
 			obs = obs_type.instantiate()
 			var obs_height = obs.get_node("Sprite2D").texture.get_height()
 			var obs_scale = obs.get_node("Sprite2D").scale
@@ -101,29 +117,61 @@ func generate_obs():
 			var obs_y : int = screen_size.y - ground_height - (obs_height * obs_scale.y / 2) + 30          
 			last_obs = obs
 			add_obs(obs, obs_x, obs_y)
-		#additionally random chance to spawn bird
+			
+		# Additionally random chance to spawn bird
 		if difficulty == MAX_DIFFICULTY:
 			if (randi() % 2) == 0:
-				#generate bird obstacles
 				obs = bird_scene.instantiate()
-				var obs_x : int  = screen_size.x + score + 100
+				var obs_x : int = screen_size.x + score + 100
 				var obs_y : int = bird_heights[randi() % bird_heights.size()]
 				add_obs(obs, obs_x, obs_y)
 
-	
 func add_obs(obs, x, y):
 	obs.position = Vector2i(x, y)
-	obs.body_entered.connect(hit_obs)
+	obs.body_entered.connect(hit_obs.bind(obs))
 	add_child(obs)
 	obstacles.append(obs)
 
 func remove_obs(obs):
-	obs.queue_free()
-	obstacles.erase(obs)
+	if is_instance_valid(obs):
+		obs.queue_free()
+		obstacles.erase(obs)
 
-func hit_obs(body):
+func hit_obs(body: Node2D, obstacle_instance: Node2D):
 	if body.name == "Player":
+		# Disable collision on the hit obstacle immediately so it can't hit twice
+		if obstacle_instance.has_node("CollisionShape2D"):
+			obstacle_instance.get_node("CollisionShape2D").set_deferred("disabled", true)
+		elif obstacle_instance.has_node("Area2D/CollisionShape2D"):
+			obstacle_instance.get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)
+			
+		# Destroy obstacle and deal damage
+		remove_obs(obstacle_instance)
+		take_damage()
+
+func take_damage():
+	if is_invincible:
+		return
+		
+	lives -= 1
+	update_lives_ui()
+	
+	if lives <= 0:
 		game_over()
+	else:
+		start_invincibility()
+
+func start_invincibility():
+	is_invincible = true
+	
+	# Blink the player 4 times over 0.8 seconds
+	var tween = create_tween().set_loops(4)
+	tween.tween_property($Player, "modulate:a", 0.2, 0.1)
+	tween.tween_property($Player, "modulate:a", 1.0, 0.1)
+	
+	await tween.finished
+	$Player.modulate.a = 1.0
+	is_invincible = false
 
 func show_score():
 	$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score / SCORE_MODIFIER)
@@ -133,7 +181,9 @@ func check_high_score():
 		high_score = score
 		$HUD.get_node("HighScoreLabel").text = "HIGHSCORE: " + str(score / SCORE_MODIFIER)
 
-
+func update_lives_ui():
+	if $HUD.has_node("LivesLabel"):
+		$HUD.get_node("LivesLabel").text = "Lives: " + str(lives)
 
 func adjust_difficulty():
 	difficulty = score / SPEED_MODIFIER
@@ -145,7 +195,7 @@ func game_over():
 	get_tree().paused = true
 	game_running = false
 	$GameOver.show()
-	
+
 func generate_cherry():
 	var cherry = CHERRY_SCENE.instantiate()
 	
@@ -157,12 +207,20 @@ func generate_cherry():
 	obstacles.append(cherry)
 	
 	cherry.get_node("Area2D").body_entered.connect(_on_cherry_collected.bind(cherry))
-	
-func _on_cherry_collected(body: Node2D, cherry_instance: Node2D):
-	
-	if body.is_in_group("player"):
+
+func _on_cherry_collected(body: Node2D, cherry_instance: AnimatedSprite2D):
+	if not is_instance_valid(cherry_instance):
+		return
+
+	if body.name == "Player" or body.is_in_group("player"):
 		score += 500
 		show_score()
-		
 		obstacles.erase(cherry_instance)
-		cherry_instance.queue_free()
+		
+		if cherry_instance.has_node("Area2D/CollisionShape2D"):
+			cherry_instance.get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)
+			
+		cherry_instance.play("collected")
+		await cherry_instance.animation_finished
+		if is_instance_valid(cherry_instance):
+			cherry_instance.queue_free()

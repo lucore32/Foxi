@@ -8,7 +8,7 @@ var is_ducking : bool = false
 
 func _physics_process(delta):
 	# If in the air and holding the down key, fall faster.
-	if not is_on_floor() and Input.is_action_pressed("ui_down"):
+	if not is_on_floor() and Input.is_action_pressed("ui_down") or Input.is_action_pressed("Crouch"):
 		velocity.y += (GRAVITY * 3.5) * delta
 	else:
 		velocity.y += GRAVITY * delta
@@ -28,7 +28,7 @@ func _physics_process(delta):
 				$DuckCol.disabled = true
 				is_ducking = false # Can't duck while jumping
 				
-			elif Input.is_action_pressed("ui_down"):
+			elif Input.is_action_pressed("ui_down") or Input.is_action_pressed("Crouch"):
 				# --- FEATURE 2: GROUND DUCKING ---
 				$AnimatedSprite2D.play("crouch")
 				$RunCol.disabled = true

@@ -1,87 +1,87 @@
-[gd_scene format=3 uid="uid://dntepo5n6d4a3"]
+[gd_scene format=3 uid="uid://bdacbpt2dtgug"]
 
-[ext_resource type="Texture2D" uid="uid://c0e4hamniywt4" path="res://Sunny-land-files/Assets/Misc/Sunnyland items/Spritesheets/cherry.png" id="1_8pvkm"]
-[ext_resource type="Texture2D" uid="uid://djbb2fuk5fjk3" path="res://Fire Effect 2/Explosion SpriteSheet.png" id="1_pg3ag"]
-[ext_resource type="Script" uid="uid://g4c85e26v7tt" path="res://cherry.gd" id="2_ht0rm"]
+[ext_resource type="Texture2D" uid="uid://djbb2fuk5fjk3" path="res://Fire Effect 2/Explosion SpriteSheet.png" id="1_nae4q"]
+[ext_resource type="Texture2D" uid="uid://c0e4hamniywt4" path="res://Sunny-land-files/Assets/Misc/Sunnyland items/Spritesheets/cherry.png" id="2_mg8re"]
+[ext_resource type="Script" uid="uid://g4c85e26v7tt" path="res://cherry.gd" id="3_0rgfb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uxbku"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jx76m"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ov1wh"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_syh1m"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2q0pr"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ad50i"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4oaam"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tctjt"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(192, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3iovd"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(0, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wxhx2"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(64, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ruylv"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(128, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rwrkh"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(192, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s5his"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(0, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hx663"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(64, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5k3cl"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(128, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8i6m3"]
-atlas = ExtResource("1_pg3ag")
+atlas = ExtResource("1_nae4q")
 region = Rect2(192, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ht0rm"]
-atlas = ExtResource("1_8pvkm")
+atlas = ExtResource("2_mg8re")
 region = Rect2(0, 0, 21, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pg3ag"]
-atlas = ExtResource("1_8pvkm")
+atlas = ExtResource("2_mg8re")
 region = Rect2(21, 0, 21, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qs0rr"]
-atlas = ExtResource("1_8pvkm")
+atlas = ExtResource("2_mg8re")
 region = Rect2(42, 0, 21, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85ui5"]
-atlas = ExtResource("1_8pvkm")
+atlas = ExtResource("2_mg8re")
 region = Rect2(63, 0, 21, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uxbku"]
@@ -171,15 +171,16 @@ radius = 8.0
 height = 16.0
 
 [node name="Cherry" type="AnimatedSprite2D" unique_id=1519208727]
+modulate = Color(1, 0.84313726, 0, 1)
 texture_filter = 1
 scale = Vector2(4.5660853, 4.554369)
 sprite_frames = SubResource("SpriteFrames_uxbku")
-animation = &"collected"
 autoplay = "default"
-frame_progress = 0.9688855
-script = ExtResource("2_ht0rm")
+frame_progress = 0.9753158
+script = ExtResource("3_0rgfb")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1964645692]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=328750916]
+visible = false
 shape = SubResource("CapsuleShape2D_8pvkm")
