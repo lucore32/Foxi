@@ -174,12 +174,12 @@ height = 16.0
 texture_filter = 1
 scale = Vector2(4.5660853, 4.554369)
 sprite_frames = SubResource("SpriteFrames_uxbku")
-animation = &"collected"
 autoplay = "default"
-frame_progress = 0.9688855
+frame_progress = 0.73383397
 script = ExtResource("2_ht0rm")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1964645692]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=328750916]
+visible = false
 shape = SubResource("CapsuleShape2D_8pvkm")

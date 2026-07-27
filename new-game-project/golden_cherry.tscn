@@ -171,12 +171,12 @@ radius = 8.0
 height = 16.0
 
 [node name="Cherry" type="AnimatedSprite2D" unique_id=1519208727]
-modulate = Color(1, 0.84313726, 0, 1)
+modulate = Color(0.9506839, 0.8011531, 2.3102762e-06, 1)
 texture_filter = 1
 scale = Vector2(4.5660853, 4.554369)
 sprite_frames = SubResource("SpriteFrames_uxbku")
 autoplay = "default"
-frame_progress = 0.9753158
+frame_progress = 0.26474303
 script = ExtResource("3_0rgfb")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1964645692]

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://21or6t0wx4ik" path="res://Jungle Asset Pack/parallax background/plx-1.png" id="1_36ycx"]
 [ext_resource type="Texture2D" uid="uid://yhw3rhcs1vnu" path="res://Jungle Asset Pack/parallax background/plx-2.png" id="2_plmvg"]
 [ext_resource type="Texture2D" uid="uid://dod8ke1l10f2q" path="res://Jungle Asset Pack/parallax background/plx-4.png" id="4_b16yh"]
-[ext_resource type="Texture2D" uid="uid://cawa8q57ttnkj" path="res://plx-5 CANDYLAND.png" id="5_36ycx"]
+[ext_resource type="Texture2D" uid="uid://x46gvoqhw7nt" path="res://plx-5 CANDYLAND (1).png" id="4_iq1of"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iq1of"]
 load_path = "res://.godot/imported/plx-3.png-4c0b0967e7d54820adffc62d21fdbed4.ctex"
@@ -57,5 +57,5 @@ motion_mirroring = Vector2(1152, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4" unique_id=791855511]
 texture_filter = 1
 scale = Vector2(3, 3)
-texture = ExtResource("5_36ycx")
+texture = ExtResource("4_iq1of")
 centered = false

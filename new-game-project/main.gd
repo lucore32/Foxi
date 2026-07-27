@@ -10,6 +10,7 @@ var bird_heights := [250, 400]
 var lives: int = 3
 var max_lives: int = 3
 var is_invincible: bool = false
+var invincibility_time_left: float = 0.0
 
 const FOX_START_POS := Vector2i(150, 485)
 const CAM_START_POS := Vector2i(576, 324)
@@ -27,6 +28,7 @@ var ground_height : int
 var game_running : bool
 var last_obs
 const CHERRY_SCENE = preload("res://cherry.tscn")
+const GOLDEN_CHERRY_SCENE = preload("res://golden_cherry.tscn")
 
 func _ready():
 	screen_size = get_window().size 
@@ -41,8 +43,12 @@ func new_game():
 	# Reset lives & invincibility
 	lives = max_lives
 	is_invincible = false
-	$Player.modulate.a = 1.0
+	invincibility_time_left = 0.0
+	$Player.modulate = Color.WHITE
 	update_lives_ui()
+	
+	if $HUD.has_node("InvincibilityTimerLabel"):
+		$HUD.get_node("InvincibilityTimerLabel").text = ""
 	
 	# Clear obstacles
 	for obs in obstacles:
@@ -77,10 +83,21 @@ func _process(delta):
 			speed = MAX_SPEED
 		adjust_difficulty()
 		
+		# Count down invincibility time
+		if invincibility_time_left > 0:
+			invincibility_time_left -= delta
+			if invincibility_time_left <= 0:
+				invincibility_time_left = 0
+				if $HUD.has_node("InvincibilityTimerLabel"):
+					$HUD.get_node("InvincibilityTimerLabel").text = ""
+			else:
+				if $HUD.has_node("InvincibilityTimerLabel"):
+					$HUD.get_node("InvincibilityTimerLabel").text = "Invincible: " + str(snappedf(invincibility_time_left, 0.1)) + "s"
+		
 		# Generate obstacles
 		generate_obs()
 		
-		# Move player and camera
+		# Move player and camera forward at full frame rate
 		$Player.position.x += speed
 		$Camera2D.position.x += speed
 		
@@ -114,7 +131,7 @@ func generate_obs():
 			var obs_height = obs.get_node("Sprite2D").texture.get_height()
 			var obs_scale = obs.get_node("Sprite2D").scale
 			var obs_x : int = screen_size.x + score + 100 + (i * 100)
-			var obs_y : int = screen_size.y - ground_height - (obs_height * obs_scale.y / 2) + 30          
+			var obs_y : int = screen_size.y - ground_height - (obs_height * obs_scale.y / 2) + 30         
 			last_obs = obs
 			add_obs(obs, obs_x, obs_y)
 			
@@ -163,14 +180,30 @@ func take_damage():
 
 func start_invincibility():
 	is_invincible = true
+	invincibility_time_left = 0.8 # 4 loops * 0.2 seconds = 0.8s
 	
-	# Blink the player 4 times over 0.8 seconds
+	# Flash red 4 times over 0.8 seconds
 	var tween = create_tween().set_loops(4)
-	tween.tween_property($Player, "modulate:a", 0.2, 0.1)
-	tween.tween_property($Player, "modulate:a", 1.0, 0.1)
+	tween.tween_property($Player, "modulate", Color(1, 0.2, 0.2, 0.8), 0.1)
+	tween.tween_property($Player, "modulate", Color.WHITE, 0.1)
 	
 	await tween.finished
-	$Player.modulate.a = 1.0
+	$Player.modulate = Color.WHITE
+	is_invincible = false
+
+func start_golden_invincibility():
+	is_invincible = true
+	invincibility_time_left = 3.0 # 15 loops * 0.2 seconds = 3 seconds total
+	
+	# Flash the player with a golden/yellow tint
+	var tween = create_tween().set_loops(15)
+	tween.tween_property($Player, "modulate", Color(1, 0.8, 0, 0.8), 0.1)
+	tween.tween_property($Player, "modulate", Color.WHITE, 0.1)
+	
+	await tween.finished
+	
+	# Ensure the player's color resets back to normal
+	$Player.modulate = Color.WHITE
 	is_invincible = false
 
 func show_score():
@@ -197,7 +230,14 @@ func game_over():
 	$GameOver.show()
 
 func generate_cherry():
-	var cherry = CHERRY_SCENE.instantiate()
+	# Golden cherries only spawn if difficulty has reached MAX_DIFFICULTY
+	var is_golden = false
+	if difficulty >= MAX_DIFFICULTY:
+		is_golden = randf() < 0.1 # 10% chance for a golden cherry
+		
+	var chosen_scene = GOLDEN_CHERRY_SCENE if is_golden else CHERRY_SCENE
+	
+	var cherry = chosen_scene.instantiate()
 	
 	var cherry_x = screen_size.x + score + randf_range(100, 300)
 	var cherry_y = randf_range(350, 450) 
@@ -206,14 +246,20 @@ func generate_cherry():
 	add_child(cherry)
 	obstacles.append(cherry)
 	
-	cherry.get_node("Area2D").body_entered.connect(_on_cherry_collected.bind(cherry))
+	cherry.get_node("Area2D").body_entered.connect(_on_cherry_collected.bind(cherry, is_golden))
 
-func _on_cherry_collected(body: Node2D, cherry_instance: AnimatedSprite2D):
+func _on_cherry_collected(body: Node2D, cherry_instance: AnimatedSprite2D, is_golden: bool):
 	if not is_instance_valid(cherry_instance):
 		return
 
-	if body.name == "Player" or body.is_in_group("player"):
-		score += 500
+	if body.name == "Foxi" or body.is_in_group("player"):
+		score += 2000 if is_golden else 500
+		
+		if is_golden:
+			lives = min(lives + 1, max_lives)
+			update_lives_ui()
+			start_golden_invincibility() # Trigger the 3-second immunity
+			
 		show_score()
 		obstacles.erase(cherry_instance)
 		
