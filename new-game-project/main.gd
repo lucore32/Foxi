@@ -7,10 +7,17 @@ var obstacle_types := [rock_scene, crate_scene]
 var obstacles : Array
 var bird_heights := [250, 400]
 
+# --- NEW: Preloaded Explosion Scene ---
+const EXPLOSION_SCENE = preload("res://explosion.tscn")
+
 var lives: int = 3
 var max_lives: int = 3
 var is_invincible: bool = false
 var invincibility_time_left: float = 0.0
+
+# --- Cooldown variables for the air-jump ability ---
+var air_ability_cooldown: float = 0.0
+const AIR_ABILITY_COOLDOWN_MAX: float = 5.0 # Change this duration (in seconds) as needed
 
 const FOX_START_POS := Vector2i(150, 485)
 const CAM_START_POS := Vector2i(576, 324)
@@ -34,6 +41,10 @@ func _ready():
 	screen_size = get_window().size 
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	$GameOver.get_node("Button").pressed.connect(new_game)
+	
+	# Connect player's air invincibility signal
+	$Player.triggered_air_invincibility.connect(_on_player_air_invincibility)
+	
 	new_game()
 
 func new_game():
@@ -44,11 +55,15 @@ func new_game():
 	lives = max_lives
 	is_invincible = false
 	invincibility_time_left = 0.0
+	air_ability_cooldown = 0.0
 	$Player.modulate = Color.WHITE
 	update_lives_ui()
 	
 	if $HUD.has_node("InvincibilityTimerLabel"):
 		$HUD.get_node("InvincibilityTimerLabel").text = ""
+		
+	if $HUD.has_node("DHLabel"):
+		$HUD.get_node("DHLabel").text = "Ability Ready!"
 	
 	# Clear obstacles
 	for obs in obstacles:
@@ -56,7 +71,7 @@ func new_game():
 			obs.queue_free()
 	obstacles.clear()
 	
-	# Clear stray animated sprites (cherries)
+	# Clear stray animated sprites (cherries/explosions)
 	for child in get_children():
 		if child is AnimatedSprite2D and child.has_signal("animation_finished"):
 			child.queue_free()
@@ -83,7 +98,7 @@ func _process(delta):
 			speed = MAX_SPEED
 		adjust_difficulty()
 		
-		# Count down invincibility time
+		# Count down general invincibility time (damage flash / golden cherry)
 		if invincibility_time_left > 0:
 			invincibility_time_left -= delta
 			if invincibility_time_left <= 0:
@@ -93,6 +108,20 @@ func _process(delta):
 			else:
 				if $HUD.has_node("InvincibilityTimerLabel"):
 					$HUD.get_node("InvincibilityTimerLabel").text = "Invincible: " + str(snappedf(invincibility_time_left, 0.1)) + "s"
+		
+		# Count down air ability cooldown and update DHLabel
+		if air_ability_cooldown > 0:
+			air_ability_cooldown -= delta
+			if air_ability_cooldown <= 0:
+				air_ability_cooldown = 0.0
+				if $HUD.has_node("DHLabel"):
+					$HUD.get_node("DHLabel").text = "Ability Ready!"
+			else:
+				if $HUD.has_node("DHLabel"):
+					$HUD.get_node("DHLabel").text = "Cooldown: " + str(snappedf(air_ability_cooldown, 0.1)) + "s"
+		else:
+			if $HUD.has_node("DHLabel"):
+				$HUD.get_node("DHLabel").text = "Ability Ready!"
 		
 		# Generate obstacles
 		generate_obs()
@@ -162,9 +191,18 @@ func hit_obs(body: Node2D, obstacle_instance: Node2D):
 		elif obstacle_instance.has_node("Area2D/CollisionShape2D"):
 			obstacle_instance.get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)
 			
+		# --- NEW: Spawn Explosion Animation ---
+		spawn_explosion(obstacle_instance.global_position)
+			
 		# Destroy obstacle and deal damage
 		remove_obs(obstacle_instance)
 		take_damage()
+
+# --- NEW: Explosion Spawn Helper Function ---
+func spawn_explosion(pos: Vector2):
+	var explosion = EXPLOSION_SCENE.instantiate()
+	explosion.position = pos
+	add_child(explosion)
 
 func take_damage():
 	if is_invincible:
@@ -206,6 +244,22 @@ func start_golden_invincibility():
 	$Player.modulate = Color.WHITE
 	is_invincible = false
 
+# Function triggered by the player's mid-air double jump
+func _on_player_air_invincibility():
+	air_ability_cooldown = AIR_ABILITY_COOLDOWN_MAX # Start cooldown timer
+	is_invincible = true
+	invincibility_time_left = 0.5 # 0.5 seconds of invincibility
+	
+	# Flash cyan/blue for air-jump invincibility
+	var tween = create_tween().set_loops(2)
+	tween.tween_property($Player, "modulate", Color(0.5, 0.8, 1, 0.8), 0.125)
+	tween.tween_property($Player, "modulate", Color.WHITE, 0.125)
+	
+	await tween.finished
+	if invincibility_time_left <= 0:
+		$Player.modulate = Color.WHITE
+		is_invincible = false
+
 func show_score():
 	$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score / SCORE_MODIFIER)
 
@@ -233,7 +287,7 @@ func generate_cherry():
 	# Golden cherries only spawn if difficulty has reached MAX_DIFFICULTY
 	var is_golden = false
 	if difficulty >= MAX_DIFFICULTY:
-		is_golden = randf() < 0.1 # 10% chance for a golden cherry
+		is_golden = randf() < 0.3 # 30% chance for a golden cherry
 		
 	var chosen_scene = GOLDEN_CHERRY_SCENE if is_golden else CHERRY_SCENE
 	

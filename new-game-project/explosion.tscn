@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://cyfmbce7fi78j"]
+
+[ext_resource type="Texture2D" uid="uid://bncg4sqbrr2k1" path="res://Fire Effect 2/Explosion 2 SpriteSheet.png" id="1_vxas0"]
+[ext_resource type="Script" uid="uid://cy5jevnp0k774" path="res://explosion.gd" id="2_j4sxf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cxdk"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lvei"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rlbx"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qgnu"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(480, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x43sf"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(528, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paiiv"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(576, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kihm"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(624, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exbut"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(672, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q85pl"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(720, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnth5"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(768, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cbhc"]
+atlas = ExtResource("1_vxas0")
+region = Rect2(816, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iuruv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cxdk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lvei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rlbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qgnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x43sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paiiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kihm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exbut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q85pl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnth5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cbhc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="Explosion" type="AnimatedSprite2D" unique_id=1230952402]
+texture_filter = 1
+scale = Vector2(4.8604927, 4.8604927)
+sprite_frames = SubResource("SpriteFrames_iuruv")
+frame_progress = 0.84488726
+script = ExtResource("2_j4sxf")

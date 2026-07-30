@@ -171,7 +171,7 @@ radius = 8.0
 height = 16.0
 
 [node name="Cherry" type="AnimatedSprite2D" unique_id=1519208727]
-modulate = Color(0.9506839, 0.8011531, 2.3102762e-06, 1)
+modulate = Color(0.73236936, 0.7037877, 0.06274655, 1)
 texture_filter = 1
 scale = Vector2(4.5660853, 4.554369)
 sprite_frames = SubResource("SpriteFrames_uxbku")
