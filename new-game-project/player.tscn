@@ -149,7 +149,7 @@ script = ExtResource("1_onrkg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1565583654]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_2hs0m")
-animation = &"jump"
+animation = &"run"
 autoplay = "Idle"
 
 [node name="RunCol" type="CollisionShape2D" parent="." unique_id=2075829750]
