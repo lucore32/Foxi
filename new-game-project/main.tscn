@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cox46jdgc0ke4" path="res://player.tscn" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b0vpyh8c7nqr5" path="res://hud.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bjqwttsw1ik3c" path="res://game_over.tscn" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://b8f16tpp2adp8" path="res://atlasaudio-game-game-music-576637.mp3" id="7_272bh"]
 
 [node name="Main" type="Node" unique_id=1645782175]
 script = ExtResource("1_1bvp3")
@@ -25,3 +26,8 @@ position_smoothing_speed = 10.0
 
 [node name="GameOver" parent="." unique_id=697435301 instance=ExtResource("6_7mycd")]
 process_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1670076081]
+stream = ExtResource("7_272bh")
+volume_db = -10.0
+autoplay = true
