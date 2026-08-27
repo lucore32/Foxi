@@ -1,5 +1,11 @@
 extends Node
 
+
+@onready var EXPLOSION__1_ : AudioStreamPlayer2D = $explosion_SFX
+@onready var CHERRY_SFX : AudioStreamPlayer2D = $cherry_SFX
+
+
+
 var rock_scene = preload("res://rock.tscn")
 var crate_scene = preload("res://crate.tscn")
 var bird_scene = preload("res://bird.tscn")
@@ -97,7 +103,7 @@ func _process(delta):
 		if speed > MAX_SPEED:
 			speed = MAX_SPEED
 		adjust_difficulty()
-		
+			
 		# Count down general invincibility time (damage flash / golden cherry)
 		if invincibility_time_left > 0:
 			invincibility_time_left -= delta
@@ -204,6 +210,11 @@ func spawn_explosion(pos: Vector2):
 	explosion.position = pos
 	add_child(explosion)
 
+	$explosion_SFX.global_position = pos
+	$explosion_SFX.stop()
+	$explosion_SFX.play()
+
+
 func take_damage():
 	if is_invincible:
 		return
@@ -222,7 +233,7 @@ func start_invincibility():
 	
 	# Flash red 4 times over 0.8 seconds
 	var tween = create_tween().set_loops(4)
-	tween.tween_property($Player, "modulate", Color(1, 0.2, 0.2, 0.8), 0.1)
+	tween.tween_property($Player, "modulate", Color(1, 0.2, 0.2, 0.8), 0.1) 
 	tween.tween_property($Player, "modulate", Color.WHITE, 0.1)
 	
 	await tween.finished
@@ -287,7 +298,7 @@ func generate_cherry():
 	# Golden cherries only spawn if difficulty has reached MAX_DIFFICULTY
 	var is_golden = false
 	if difficulty >= MAX_DIFFICULTY:
-		is_golden = randf() < 0.3 # 30% chance for a golden cherry
+		is_golden = randf() < 0.4 # 40% chance for a golden cherry
 		
 	var chosen_scene = GOLDEN_CHERRY_SCENE if is_golden else CHERRY_SCENE
 	
@@ -307,7 +318,11 @@ func _on_cherry_collected(body: Node2D, cherry_instance: AnimatedSprite2D, is_go
 		return
 
 	if body.name == "Foxi" or body.is_in_group("player"):
+		CHERRY_SFX.global_position = cherry_instance.global_position
+		CHERRY_SFX.play()
 		score += 2000 if is_golden else 500
+
+
 		
 		if is_golden:
 			lives = min(lives + 1, max_lives)

@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b0vpyh8c7nqr5" path="res://hud.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bjqwttsw1ik3c" path="res://game_over.tscn" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://b8f16tpp2adp8" path="res://atlasaudio-game-game-music-576637.mp3" id="7_272bh"]
+[ext_resource type="AudioStream" uid="uid://cpi3y3wktj0lu" path="res://powerUp.wav" id="8_5vw27"]
+[ext_resource type="AudioStream" uid="uid://xdcsgu4xobex" path="res://explosion (2).wav" id="9_kek77"]
+[ext_resource type="AudioStream" uid="uid://cuoqpynogrbj4" path="res://assets/fonts/pickupCoin (1).wav" id="10_4c57u"]
 
 [node name="Main" type="Node" unique_id=1645782175]
 script = ExtResource("1_1bvp3")
@@ -32,3 +35,14 @@ stream = ExtResource("7_272bh")
 volume_db = -10.0
 autoplay = true
 bus = &"Music"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=793541544]
+stream = ExtResource("8_5vw27")
+volume_db = -10.0
+
+[node name="explosion_SFX" type="AudioStreamPlayer2D" parent="." unique_id=1610288356]
+stream = ExtResource("9_kek77")
+bus = &"SFX"
+
+[node name="cherry_SFX" type="AudioStreamPlayer2D" parent="." unique_id=472328289]
+stream = ExtResource("10_4c57u")

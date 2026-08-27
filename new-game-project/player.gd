@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var sfx_jump: AudioStreamPlayer2D = $sfx_jump
+
 const GRAVITY : int = 4200
 const JUMP_SPEED : int = -1300
 
@@ -43,7 +45,7 @@ func _physics_process(delta):
 				$RunCol.disabled = true
 				$DuckCol.disabled = true
 				is_ducking = false # Can't duck while jumping
-				
+				sfx_jump.play()
 			elif Input.is_action_pressed("ui_down") or Input.is_action_pressed("Crouch"):
 				# --- FEATURE 2: GROUND DUCKING ---
 				$AnimatedSprite2D.play("crouch")

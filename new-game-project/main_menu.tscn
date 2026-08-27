@@ -5,37 +5,140 @@
 [ext_resource type="Script" uid="uid://dcwe6x65jjwfm" path="res://main_menu.gd" id="1_fu7sn"]
 [ext_resource type="AudioStream" uid="uid://cxy182c71mg7c" path="res://the_mountain-game-game-music-508018.mp3" id="4_jix8l"]
 [ext_resource type="Script" uid="uid://cu254q1wfspkb" path="res://audio_control.gd" id="5_glbon"]
+[ext_resource type="Texture2D" uid="uid://pxfwpwc4y55c" path="res://jell-o_cake.png" id="5_qe12f"]
+[ext_resource type="Script" uid="uid://buiuxs3comio" path="res://sfx_control.gd" id="6_nlkkf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fu7sn"]
 texture = ExtResource("1_7vrkn")
 modulate_color = Color(0.556953, 0.556953, 0.556953, 1)
 
+[sub_resource type="Theme" id="Theme_nlkkf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qe12f"]
+bg_color = Color(0.92941177, 0.5686275, 0.043137256, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlkkf"]
+bg_color = Color(0.498524, 0.32357278, 0.047200926, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qtwp"]
+bg_color = Color(0.98342603, 0.658816, 0.2273384, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8qtwp"]
+load_path = "res://.godot/imported/orange_cake.png-627bc7d0f3b9bcfe3355b5af699000a2.ctex"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dy7ct"]
+bg_color = Color(0.9843137, 0.77254903, 0.4745098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0o4t1"]
+bg_color = Color(0.7059814, 0.48701262, 0.112441815, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5v2v"]
+bg_color = Color(0.9939795, 0.8628035, 0.687357, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0o4t1"]
+load_path = "res://.godot/imported/strawberry_pudding_cake.png-71432b8e52e29445be520f61b06bc940.ctex"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0k4wn"]
+bg_color = Color(0.96862745, 0.67058825, 0.7490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iotk1"]
+bg_color = Color(0.94023675, 0.46726596, 0.61763245, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w44g7"]
+bg_color = Color(0.9798166, 0.80255497, 0.8462405, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0, 0, 0, 0.20392157)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j5v2v"]
+load_path = "res://.godot/imported/bubblegum_cake.png-d79193167bb3733115670b2b2609c1d2.ctex"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+bg_color = Color(0.36862746, 0.7764706, 0.18431373, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 shadow_color = Color(0, 0, 0, 0.20392157)
 shadow_size = 5
 shadow_offset = Vector2(0, 3.41)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
-bg_color = Color(0.5463035, 0.54630315, 0.5463032, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+bg_color = Color(0.24491423, 0.51733917, 0.12707442, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 shadow_color = Color(0, 0, 0, 0.20392157)
 shadow_size = 5
 shadow_offset = Vector2(0, 3.41)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jix8l"]
-bg_color = Color(0.7316106, 0.73161054, 0.73161054, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+bg_color = Color(0.41857743, 0.88773626, 0.20119205, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 shadow_color = Color(0, 0, 0, 0.20392157)
 shadow_size = 5
 shadow_offset = Vector2(0, 3.41)
@@ -47,6 +150,17 @@ thickness = 6
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_glbon"]
 color = Color(0.34841245, 0.38893214, 0.40262038, 1)
 thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_nlkkf"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_qe12f"]
+color = Color(0.34901962, 0.3882353, 0.40392157, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8qtwp"]
+color = Color(0.34901962, 0.3882353, 0.40392157, 1)
 
 [node name="Control" type="Control" unique_id=1672561239]
 layout_mode = 3
@@ -84,16 +198,18 @@ theme_override_constants/separation = 5
 [node name="Button" type="Button" parent="MainButtons" unique_id=577604233]
 layout_mode = 2
 size_flags_vertical = 3
+theme = SubResource("Theme_nlkkf")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_06t4h")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qe12f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nlkkf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8qtwp")
 text = "Start Game"
+icon = SubResource("CompressedTexture2D_8qtwp")
 
 [node name="Button2" type="Button" parent="MainButtons" unique_id=695067661]
 layout_mode = 2
@@ -104,10 +220,11 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_06t4h")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_dy7ct")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0o4t1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j5v2v")
 text = "Options"
+icon = SubResource("CompressedTexture2D_0o4t1")
 
 [node name="Button3" type="Button" parent="MainButtons" unique_id=650390367]
 layout_mode = 2
@@ -118,11 +235,12 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_06t4h")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0k4wn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iotk1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w44g7")
 text = "Quit
 "
+icon = SubResource("CompressedTexture2D_j5v2v")
 
 [node name="Label" type="Label" parent="." unique_id=1528209158]
 layout_mode = 1
@@ -176,9 +294,9 @@ vertical_alignment = 1
 [node name="Back" type="Button" parent="Options/Label" unique_id=1611271294]
 layout_mode = 0
 offset_left = 138.17917
-offset_top = 256.0
+offset_top = 231.0
 offset_right = 332.35834
-offset_bottom = 336.0
+offset_bottom = 331.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
@@ -191,6 +309,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_fu7sn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
 text = "Back
 "
+icon = ExtResource("5_qe12f")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Options" unique_id=525386237]
 layout_mode = 1
@@ -226,8 +345,30 @@ value = 1.0
 script = ExtResource("5_glbon")
 audio_bus_name = "Music"
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="Options/VBoxContainer" unique_id=662489459]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Label" type="Label" parent="Options/VBoxContainer/HBoxContainer2" unique_id=856973370]
+layout_mode = 2
+text = "SFX Volume:"
+
+[node name="SFXControl" type="HSlider" parent="Options/VBoxContainer/HBoxContainer2" unique_id=865811496]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_nlkkf")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_qe12f")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8qtwp")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("6_nlkkf")
+audio_bus_name = "SFX"
+
 [connection signal="pressed" from="MainButtons/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MainButtons/Button2" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MainButtons/Button3" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Options/Label/Back" to="." method="_on_back_pressed"]
 [connection signal="value_changed" from="Options/VBoxContainer/HBoxContainer/AudioControl" to="Options/VBoxContainer/HBoxContainer/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/HBoxContainer2/SFXControl" to="Options/VBoxContainer/HBoxContainer2/SFXControl" method="_on_value_changed"]
